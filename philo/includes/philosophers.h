@@ -13,6 +13,11 @@
 # include "structures.h"
 # include "defines.h"
 
+/*	GLOBALS */
+extern int		dead;
+extern int		fork1;
+extern int		fork2;
+
 /*	!!! DEBUG.C !!! */
 void	display_params(t_params *params);
 
@@ -25,6 +30,9 @@ int		display_ret_parsing_err(int error);
 /*	initializations.c */
 void	init_params(t_params *params);
 
+/*	actions.c */
+void	grab_forks(t_philo *philo);
+
 /*	libft */
 int		ft_atoi(const char *nptr);
 void	ft_putchar_fd(char c, int fd);
@@ -34,5 +42,8 @@ void	ft_putendl_fd(char *s, int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
+
+/*	tests */
+long unsigned int   get_timestamp(t_timeval now, t_timeval zero);
 
 #endif

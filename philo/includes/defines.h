@@ -19,10 +19,11 @@ enum	e_errors
 
 enum	e_state
 {
-	DEAD,
+	WAITING = -1,
 	EAT,
 	SLEEP,
 	THINK,
+	DEAD
 };
 
 #endif

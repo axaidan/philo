@@ -7,6 +7,7 @@ SRCS		=	debug.c \
 				main.c \
 				parsing.c \
 				errors.c \
+				actions.c \
 				initializations.c \
 				libft/ft_putstr_fd.c \
 				libft/ft_putchar_fd.c \
@@ -38,7 +39,7 @@ all			:	${NAME}
 
 
 ${NAME}		:	${OBJS}
-			${CC} ${E_FLAGS} ${OBJS} -o ${NAME}
+			${CC} ${E_FLAGS} ${OBJS} -o ${NAME} -lpthread
 
 #bonus		:	${B_NAME}
 
