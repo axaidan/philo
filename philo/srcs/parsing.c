@@ -50,7 +50,7 @@ static int	check_overflow(int argc, char **argv)
 	return (SUCCESS);
 }
 
-static void	get_values(int argc, char **argv, t_params *params)
+static int	get_values(int argc, char **argv, t_params *params)
 {
 	params->n = ft_atoi(argv[1]);
 	params->die = ft_atoi(argv[2]);
@@ -58,20 +58,23 @@ static void	get_values(int argc, char **argv, t_params *params)
 	params->slp = ft_atoi(argv[4]);
 	if (argc == 6)
 		params->times = ft_atoi(argv[5]);
+	if (params->n == 0 || params->die == 0 || params->eat == 0
+		|| params->slp == 0 || params->times == 0)
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 int	parsing(int argc, char **argv, t_params *params)
 {
 	if (argc != 5 && argc != 6)
-		return (display_ret_err(ER_ARGC));
+		return (display_ret_parsing_err(ER_ARGC));
 	if (check_empty(argc, argv) == FAILURE)
-		return (display_ret_err(ER_EMPTY));
+		return (display_ret_parsing_err(ER_EMPTY));
 	if (check_digits(argc, argv) == FAILURE)
-		return (display_ret_err(ER_DIGIT));
+		return (display_ret_parsing_err(ER_DIGIT));
 	if (check_overflow(argc, argv) == FAILURE)
-		return (display_ret_err(ER_OVFLW));
-	get_values(argc, argv, params);
-	// CHECK VALUES
-	// lala
+		return (display_ret_parsing_err(ER_OVFLW));
+	if (get_values(argc, argv, params) == FAILURE)
+		return (display_ret_parsing_err(ER_VALUE));
 	return (SUCCESS);
 }

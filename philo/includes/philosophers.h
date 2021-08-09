@@ -20,7 +20,7 @@ void	display_params(t_params *params);
 int		parsing(int argc, char **argv, t_params *params);
 
 /*	errors.c */
-int		display_ret_err(int error);
+int		display_ret_parsing_err(int error);
 
 /*	initializations.c */
 void	init_params(t_params *params);

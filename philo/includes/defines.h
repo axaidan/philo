@@ -8,12 +8,21 @@
 # define FAILURE 1
 
 /*	ERRORS */
-enum e_errors
+enum	e_errors
 {
 	ER_ARGC = 1,
 	ER_EMPTY,
 	ER_DIGIT,
-	ER_OVFLW
+	ER_OVFLW,
+	ER_VALUE
+};
+
+enum	e_state
+{
+	DEAD,
+	EAT,
+	SLEEP,
+	THINK,
 };
 
 #endif

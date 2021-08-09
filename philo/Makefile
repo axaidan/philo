@@ -1,6 +1,5 @@
-NAME		=	philosophers
-
 # NAME MUST BE CHANGED BEFORE SUBMITTING
+NAME		=	philosophers
 
 #B_NAME		=	pipex_bonus
 
@@ -33,6 +32,9 @@ I_FLD		=	includes/
 I_FLAGS		=	-I ${I_FLD}
 
 all			:	${NAME}
+			@echo "====================================================="
+			@echo "DON'T FORGET TO CHANGE PROGRAM NAME BEFORE SUBMITTING"
+			@echo "====================================================="
 
 
 ${NAME}		:	${OBJS}
