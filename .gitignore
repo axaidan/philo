@@ -1,3 +1,4 @@
 philosophers
 *.o
+*.swp
 a.out
