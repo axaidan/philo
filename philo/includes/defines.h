@@ -1,6 +1,8 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+# define WAIT_UNIT_US 50
+
 /*	LOGICALS */
 # define TRUE 1
 # define FALSE 0

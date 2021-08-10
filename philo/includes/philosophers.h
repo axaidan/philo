@@ -31,7 +31,8 @@ int		display_ret_parsing_err(int error);
 void	init_params(t_params *params);
 
 /*	actions.c */
-void	grab_forks(t_philo *philo);
+void	think(t_philo *philo);
+void	eat(t_philo *philo);
 
 /*	libft */
 int		ft_atoi(const char *nptr);
@@ -44,6 +45,6 @@ int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 
 /*	tests */
-long unsigned int   get_timestamp(t_timeval now, t_timeval zero);
+long unsigned int   get_timestamp(/*t_timeval now, t_timeval zero*/void);
 
 #endif
