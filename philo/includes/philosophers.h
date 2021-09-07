@@ -20,19 +20,25 @@ extern int		fork2;
 
 /*	!!! DEBUG.C !!! */
 void	display_params(t_params *params);
+void	display_philos(t_philo *philos_arr, int n);
 
 /*	parsing.c */
 int		parsing(int argc, char **argv, t_params *params);
 
 /*	errors.c */
 int		display_ret_parsing_err(int error);
+int		display_ret_system_err(int error, t_philo *philos, int n);
+void	destroy_all(t_philo *philos, int n);
 
 /*	initializations.c */
 void	init_params(t_params *params);
+int		init_philos_array(int n/*, t_params *params*/, t_philo **philos_ptr);
 
 /*	actions.c */
 void	think(t_philo *philo);
 void	eat(t_philo *philo);
+void	drop_forks(t_philo *philo);
+void	sleeping(t_philo *philo);
 
 /*	libft */
 int		ft_atoi(const char *nptr);
@@ -44,7 +50,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 
-/*	tests */
-long unsigned int   get_timestamp(/*t_timeval now, t_timeval zero*/void);
+/*	time.c */
+long unsigned int   get_timestamp(void);
+void				safe_sleep(long unsigned int length);
 
 #endif

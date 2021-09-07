@@ -8,3 +8,15 @@ void	display_params(t_params *params)
 	printf("slp\t=\t%10d\n", params->slp);
 	printf("times\t=\t%10d\n", params->times);
 }
+
+void	display_philos(t_philo *philos_arr, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		printf("philo %d\n", philos_arr[i].n);
+		i++;
+	}	
+}

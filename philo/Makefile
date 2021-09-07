@@ -7,8 +7,8 @@ SRCS		=	debug.c \
 				main.c \
 				parsing.c \
 				errors.c \
-				actions.c \
 				initializations.c \
+				time.c \
 				libft/ft_putstr_fd.c \
 				libft/ft_putchar_fd.c \
 				libft/ft_putendl_fd.c \

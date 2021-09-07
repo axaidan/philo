@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
-# define WAIT_UNIT_US 50
+# define WAIT_UNIT_US 300
 
 /*	LOGICALS */
 # define TRUE 1
@@ -16,7 +16,9 @@ enum	e_errors
 	ER_EMPTY,
 	ER_DIGIT,
 	ER_OVFLW,
-	ER_VALUE
+	ER_VALUE,
+	ER_ARR_ALC,
+	ER_MUT_INIT
 };
 
 enum	e_state

@@ -18,3 +18,32 @@ int	display_ret_parsing_err(int error)
 	}
 	return (error);
 }	
+
+void	destroy_all(t_philo *philos, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n && (philos + i)->initialized == TRUE)
+	{
+		pthread_mutex_destroy(&(philos + i)->left);
+		i++;
+	}
+	free(philos);
+}
+
+int	display_ret_system_err(int error, t_philo *philos, int n)
+{
+	if (error)
+	{
+		ft_putstr_fd("philo: system error: ", STDERR_FILENO);
+		if (error == ER_ARR_ALC)
+			ft_putendl_fd("could not allocate philosophers array",
+				STDERR_FILENO);
+		else if (error == ER_MUT_INIT)
+			ft_putendl_fd("could not initialize a mutex",
+				STDERR_FILENO);
+	}
+	destroy_all(philos, n);
+	return (error);
+}
