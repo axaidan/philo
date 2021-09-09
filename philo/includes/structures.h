@@ -20,14 +20,15 @@ typedef struct	s_philo
 	t_thread	thr;
 	int			n;
 	int			forks;
+	t_mutex		left;	
 	t_mutex		*left_ptr;
 	t_mutex		*right_ptr;
 	t_tstamp	last_eat;
 	t_tstamp	death_time;
 	int			must_eat;
-	t_mutex		left;	
-	int			initialized;
-//	t_params	*params;
+	int			m_init;
+	int			t_init;
+	t_params	*params;
 }				t_philo;
 
 int	g_dead;

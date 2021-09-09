@@ -24,9 +24,10 @@ void	destroy_all(t_philo *philos, int n)
 	int	i;
 
 	i = 0;
-	while (i < n && (philos + i)->initialized == TRUE)
+	while (i < n && (philos + i)->m_init == TRUE)
 	{
 		pthread_mutex_destroy(&(philos + i)->left);
+		printf("destroyed mutex %d\n", i);
 		i++;
 	}
 	free(philos);

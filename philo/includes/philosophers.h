@@ -32,7 +32,7 @@ void	destroy_all(t_philo *philos, int n);
 
 /*	initializations.c */
 void	init_params(t_params *params);
-int		init_philos_array(int n/*, t_params *params*/, t_philo **philos_ptr);
+int		init_philos_array(int n, t_params *params, t_philo **philos_ptr);
 
 /*	actions.c */
 void	think(t_philo *philo);
@@ -51,7 +51,11 @@ int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 
 /*	time.c */
-long unsigned int   get_timestamp(void);
-void				safe_sleep(long unsigned int length);
+t_tstamp	get_timestamp(void);
+void		safe_sleep(long unsigned int length);
 
+/*	threads.c */
+void	join_all_threads(t_philo *philos, int n);
+void	*routine(void *param);
+int		start_all_threds(t_philo *philos, int n);
 #endif

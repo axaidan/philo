@@ -9,6 +9,7 @@ SRCS		=	debug.c \
 				errors.c \
 				initializations.c \
 				time.c \
+				threads.c \
 				libft/ft_putstr_fd.c \
 				libft/ft_putchar_fd.c \
 				libft/ft_putendl_fd.c \
