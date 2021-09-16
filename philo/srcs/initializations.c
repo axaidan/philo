@@ -24,31 +24,7 @@ static void init_philo(t_philo *philo, int i, t_params *params)
 	philo->params = params;
 }
 
-int		check_fork_assignment(t_philo *philos, int n)
-{
-	int	i;
 
-	i = 0;
-	while (i < n)
-	{
-		if (i == 0)
-		{
-			if (philos->right_ptr == (philos + n - 1)->left_ptr)
-				printf("philos 0 and n share a fork\n");
-			else
-				printf("philos 0 and n don't share a fork\n");
-		}
-		else
-		{
-			if ((philos + i)->right_ptr == (philos + i - 1)->left_ptr)
-				printf("philos %d and %d share a fork\n", i, i - 1);
-			else
-				printf("philos %d and %d don't share a fork\n", i, i - 1);
-		}
-		i++;
-	}
-	return (SUCCESS);
-}
 
 int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 {
@@ -75,6 +51,6 @@ int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 		i++;
 	}
 	(*philos_ptr)->right_ptr = (*philos_ptr + i - 1)->left_ptr;
-	check_fork_assignment(*philos_ptr, n);
+//	check_fork_assignment(*philos_ptr, n);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@ int	main(int argc, char *argv[])
 	t_params	params;
 	t_philo		*philos;
 
-	g_dead = 0;
+	g_dead = FALSE;
 	init_params(&params);
 	error = parsing(argc, argv, &params);
 	if (error)
@@ -16,10 +16,9 @@ int	main(int argc, char *argv[])
 	error = init_philos_array(params.n, &params, &philos);
 	if (error)
 		return (error);
-	display_philos(philos, params.n);
-	get_timestamp();
-//	start_all_threads(philos, params.n);
-	//launch_watcher();
+//	display_philos(philos, params.n);
+	get_timestamp();	// SET ZERO
+	start_all_threads(philos, params.n);
 	join_all_threads(philos, params.n);
 	destroy_all(philos, params.n);
 	return (100);

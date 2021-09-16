@@ -18,7 +18,8 @@ enum	e_errors
 	ER_OVFLW,
 	ER_VALUE,
 	ER_ARR_ALC,
-	ER_MUT_INIT
+	ER_MUT_INIT,
+	ER_THR_CREA
 };
 
 enum	e_state

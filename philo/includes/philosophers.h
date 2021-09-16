@@ -13,14 +13,10 @@
 # include "structures.h"
 # include "defines.h"
 
-/*	GLOBALS */
-extern int		dead;
-extern int		fork1;
-extern int		fork2;
-
 /*	!!! DEBUG.C !!! */
 void	display_params(t_params *params);
 void	display_philos(t_philo *philos_arr, int n);
+int		check_fork_assignment(t_philo *philos, int n);
 
 /*	parsing.c */
 int		parsing(int argc, char **argv, t_params *params);
@@ -39,6 +35,8 @@ void	think(t_philo *philo);
 void	eat(t_philo *philo);
 void	drop_forks(t_philo *philo);
 void	sleeping(t_philo *philo);
+void	message(t_philo *philo, char *action, t_tstamp timestamp, int die);
+void	death(t_philo *philo, t_tstamp timestamp);
 
 /*	libft */
 int		ft_atoi(const char *nptr);
@@ -57,5 +55,6 @@ void		safe_sleep(long unsigned int length);
 /*	threads.c */
 void	join_all_threads(t_philo *philos, int n);
 void	*routine(void *param);
-int		start_all_threds(t_philo *philos, int n);
+int		start_all_threads(t_philo *philos, int n);
+
 #endif
