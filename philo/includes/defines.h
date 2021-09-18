@@ -9,7 +9,6 @@
 # define FALSE 0
 # define SUCCESS 0
 # define FAILURE 1
-# define PENDING -1
 
 /*	ERRORS */
 enum	e_errors

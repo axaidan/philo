@@ -1,5 +1,11 @@
 #include "philosophers.h"
 
+void	safe_sleep(t_tstamp until)
+{
+	while (get_timestamp() < until)
+		usleep(WAIT_UNIT_US);
+}
+
 long unsigned int   get_timestamp(void)
 {
 	static int			first = TRUE;

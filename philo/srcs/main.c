@@ -5,7 +5,6 @@ void	watcher(t_philo *philos, int n)
 	int			i;
 	t_tstamp	timestamp;
 
-	g_dead = FALSE;
 	i = 0;
 	while (i < n)
 	{
@@ -13,7 +12,8 @@ void	watcher(t_philo *philos, int n)
 		if (timestamp >= (philos + i)->death_time)
 		{
 			g_dead = TRUE;
-			display(timestamp, n, "dead");
+			message(philos + i, "died", timestamp, TRUE);
+//			display(timestamp, n, "is dead");
 			break;
 		}
 		i++;

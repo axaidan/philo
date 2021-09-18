@@ -3,13 +3,13 @@
 void	display(t_tstamp timestamp, int n, char *action)
 {
 	ft_putnbr_fd((int)timestamp, STDOUT_FILENO);
-	ft_putstr_fd("\tphilo\t", STDOUT_FILENO);
+	ft_putstr_fd("\t\tphilo\t", STDOUT_FILENO);
 	ft_putnbr_fd(n, STDOUT_FILENO);
-	ft_putstr_fd("\tis\t", STDOUT_FILENO);
+	ft_putchar_fd('\t', STDOUT_FILENO);
 	ft_putendl_fd(action, STDOUT_FILENO);
 }
 
-void	message(t_philo *philo, char *action, t_tstamp timestamp)
+void	message(t_philo *philo, char *action, t_tstamp timestamp, int dead)
 {
 	static int		first = TRUE;
 	static t_mutex	msg_mutex;
@@ -21,8 +21,8 @@ void	message(t_philo *philo, char *action, t_tstamp timestamp)
 			printf("message mutex initialization error\n");
 	}
 	pthread_mutex_lock(&msg_mutex);
-	if (g_dead == FALSE)
-		display(timestamp, philo->n, action);
+	if (g_dead == FALSE || dead == TRUE)
+		display(timestamp, philo->n + 1, action);
 	pthread_mutex_unlock(&msg_mutex);
 }
 
@@ -40,24 +40,32 @@ void	think(t_philo *philo)
 	   		grab_fork2(philo);
 	}
 }
+*/
 
-void	eat(t_philo *philo)
+void	eating(t_philo *philo)
 {
-	long unsigned int	eat_ms_time;
-	long unsigned int	wait_units;
+	t_tstamp	timestamp;
 
-	if (philo->forks < 2)
-		return ;
-	printf("%15lu philo %d is eating\n", get_timestamp(), philo->n);
-	eat_ms_time = philo->args->eat;
-	wait_units = eat_ms_time * 20;
-	while (wait_units != 0)
-	{
-		usleep(50);
-		wait_units--;
-	}
+	pthread_mutex_lock(philo->left_ptr);
+	message(philo, "has taken L fork", get_timestamp(), FALSE);
+	pthread_mutex_lock(philo->right_ptr);
+	message(philo, "has taken R fork", get_timestamp(), FALSE);
+	timestamp = get_timestamp();
+	philo->death_time = timestamp + philo->params->die;
+	message(philo, "is eating", timestamp, FALSE);
+	safe_sleep(timestamp + philo->params->eat);
+	pthread_mutex_unlock(philo->right_ptr);
+	pthread_mutex_unlock(philo->left_ptr);
 }
 
+void	sleeping(t_philo *philo)
+{
+	message(philo, "is sleeping", get_timestamp(), FALSE);
+	safe_sleep(get_timestamp() + philo->params->slp);
+	message(philo, "is thinking", get_timestamp(), FALSE);
+}
+
+/*
 void	drop_forks(t_philo *philo)
 {
 	if (philo->forks < 2)
