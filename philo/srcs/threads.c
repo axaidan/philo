@@ -2,13 +2,10 @@
 
 void    *routine(void *param)
 {
-	// SET DEATH_TIME
-	// START A LOOP CONTROLLING IF DEATH_TIME WAS REACHED
     t_philo             *philo;
 
     philo = param;
-	message(philo, "born", get_timestamp(), FALSE);
-	philo->death_time = philo->params->die;
+//	message(philo, "born", get_timestamp());
 /*
     if (philo->n % 2 == 1)
         think(philo);
@@ -17,8 +14,9 @@ void    *routine(void *param)
 */
     while (g_dead == FALSE)
     {
-		if (get_timestamp() > philo->death_time)
-			message(philo, NULL, get_timestamp(), TRUE);
+		;
+//		if (get_timestamp() > philo->death_time)
+//			message(philo, NULL, get_timestamp(), TRUE);
 		/*
         think(philo);
         eat(philo);
@@ -42,6 +40,8 @@ int		start_all_threads(t_philo *philos, int n)
 		(philos + i)->t_init = TRUE;
 		i++;
 	}
+	ft_putnbr_fd((int)get_timestamp(), STDOUT_FILENO);
+	ft_putendl_fd("\tall philos were born", STDOUT_FILENO);
 	return (SUCCESS);
 }
 
@@ -52,8 +52,9 @@ void	join_all_threads(t_philo *philos, int n)
 	i = 0;
 	while (i < n && (philos + i)->t_init == TRUE)
 	{
-		if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
-			printf("joined thread %d\n", i);
+		pthread_join((philos + i)->thr, NULL);
+		//if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
+		//	printf("joined thread %d\n", i);
 		i++;
 	}
 }

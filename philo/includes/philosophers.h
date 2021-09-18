@@ -35,8 +35,9 @@ void	think(t_philo *philo);
 void	eat(t_philo *philo);
 void	drop_forks(t_philo *philo);
 void	sleeping(t_philo *philo);
-void	message(t_philo *philo, char *action, t_tstamp timestamp, int die);
+void	message(t_philo *philo, char *action, t_tstamp timestamp);
 void	death(t_philo *philo, t_tstamp timestamp);
+void	display(t_tstamp timestamp, int n, char *action);
 
 /*	libft */
 int		ft_atoi(const char *nptr);

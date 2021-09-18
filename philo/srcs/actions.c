@@ -1,6 +1,15 @@
 #include "philosophers.h"
 
-void	message(t_philo *philo, char *action, t_tstamp timestamp, int die)
+void	display(t_tstamp timestamp, int n, char *action)
+{
+	ft_putnbr_fd((int)timestamp, STDOUT_FILENO);
+	ft_putstr_fd("\tphilo\t", STDOUT_FILENO);
+	ft_putnbr_fd(n, STDOUT_FILENO);
+	ft_putstr_fd("\tis\t", STDOUT_FILENO);
+	ft_putendl_fd(action, STDOUT_FILENO);
+}
+
+void	message(t_philo *philo, char *action, t_tstamp timestamp)
 {
 	static int		first = TRUE;
 	static t_mutex	msg_mutex;
@@ -11,23 +20,21 @@ void	message(t_philo *philo, char *action, t_tstamp timestamp, int die)
 		if (pthread_mutex_init(&msg_mutex, NULL) != SUCCESS)
 			printf("message mutex initialization error\n");
 	}
-	if (g_dead == FALSE && die == FALSE)
-	{
-		pthread_mutex_lock(&msg_mutex);
-		printf("%10lu philo %4d is %s\n", timestamp, philo->n + 1, action);
-		pthread_mutex_unlock(&msg_mutex);
-	}
+	pthread_mutex_lock(&msg_mutex);
+//	printf("%10lu philo %4d is %s\n", timestamp, philo->n + 1, action);
+	if (g_dead == FALSE)
+	display(timestamp, philo->n, action);
+	pthread_mutex_unlock(&msg_mutex);
+	/*
 	else if (die == TRUE)
 	{
 		pthread_mutex_lock(&msg_mutex);
-		if (g_dead == FALSE)
-		{
-			g_dead = TRUE;
-			printf("%10lu philo %4d is dead\n", timestamp, philo->n + 1);
-		}
+//		printf("%10lu philo %4d is dead\n", timestamp, philo->n + 1);
+		display(timestamp, philo->n, "dead");
 		pthread_mutex_unlock(&msg_mutex);
 		pthread_mutex_destroy(&msg_mutex);
 	}
+	*/
 }
 
 /*
