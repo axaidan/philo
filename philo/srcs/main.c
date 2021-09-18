@@ -28,8 +28,7 @@ int	main(int argc, char *argv[])
 	t_params	params;
 	t_philo		*philos;
 
-	//g_dead = FALSE;
-	g_dead = PENDING;
+	g_dead = FALSE;
 	init_params(&params);
 	error = parsing(argc, argv, &params);
 	if (error)

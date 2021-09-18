@@ -14,9 +14,7 @@ void    *routine(void *param)
 */
     while (g_dead == FALSE)
     {
-		;
-//		if (get_timestamp() > philo->death_time)
-//			message(philo, NULL, get_timestamp(), TRUE);
+		usleep(WAIT_UNIT_US);
 		/*
         think(philo);
         eat(philo);

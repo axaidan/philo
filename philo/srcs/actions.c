@@ -21,20 +21,9 @@ void	message(t_philo *philo, char *action, t_tstamp timestamp)
 			printf("message mutex initialization error\n");
 	}
 	pthread_mutex_lock(&msg_mutex);
-//	printf("%10lu philo %4d is %s\n", timestamp, philo->n + 1, action);
 	if (g_dead == FALSE)
-	display(timestamp, philo->n, action);
+		display(timestamp, philo->n, action);
 	pthread_mutex_unlock(&msg_mutex);
-	/*
-	else if (die == TRUE)
-	{
-		pthread_mutex_lock(&msg_mutex);
-//		printf("%10lu philo %4d is dead\n", timestamp, philo->n + 1);
-		display(timestamp, philo->n, "dead");
-		pthread_mutex_unlock(&msg_mutex);
-		pthread_mutex_destroy(&msg_mutex);
-	}
-	*/
 }
 
 /*
@@ -42,14 +31,14 @@ void	think(t_philo *philo)
 {
 	if (philo->forks == 2)
 		return ;
-	   printf("%15lu philo %d is thinking\n", get_timestamp(), philo->n);
-	   while (philo->forks < 2)
-	   {
+   printf("%15lu philo %d is thinking\n", get_timestamp(), philo->n);
+   while (philo->forks < 2)
+   {
 	   if (fork1 == FALSE && philo->forks < 2)
-	   grab_fork1(philo);
+			grab_fork1(philo);
 	   if (fork2 == FALSE && philo->forks < 2)
-	   grab_fork2(philo);
-	   }
+	   		grab_fork2(philo);
+	}
 }
 
 void	eat(t_philo *philo)

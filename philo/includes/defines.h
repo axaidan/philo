@@ -1,6 +1,7 @@
 #ifndef DEFINES_H
 # define DEFINES_H
 
+/*	TIMING */
 # define WAIT_UNIT_US 300
 
 /*	LOGICALS */
