@@ -25,8 +25,6 @@ static void init_philo(t_philo *philo, int i, t_params *params)
 	philo->last_state = BORN;
 }
 
-
-
 int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 {
 	int	i;
@@ -47,11 +45,18 @@ int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 			return (display_ret_system_err(ER_MUT_INIT, *philos_ptr, n));
 		(*philos_ptr + i)->m_init = TRUE;
 		(*philos_ptr + i)->left_ptr = &(*philos_ptr + i)->left;
-		if (i > 0)
-			(*philos_ptr + i)->right_ptr = (*philos_ptr + i - 1)->left_ptr;
 		i++;
 	}
-	(*philos_ptr)->right_ptr = (*philos_ptr + i - 1)->left_ptr;
-//	check_fork_assignment(*philos_ptr, n);
+	if (n == 1)
+		return (SUCCESS);
+	i = 0;
+	while (i < n)
+	{
+		if (i < n - 1)
+			(*philos_ptr + i)->right_ptr = (*philos_ptr + i + 1)->left_ptr;
+		i++;
+	}
+	(*philos_ptr + n - 1)->right_ptr = (*philos_ptr)->left_ptr;
+	check_fork_assignment(*philos_ptr, n);
 	return (SUCCESS);
 }

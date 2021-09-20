@@ -1,0 +1,163 @@
+0		philo	1	is thinking
+0		philo	1	has taken L fork
+0		philo	1	has taken R fork
+0		philo	1	is eating
+0		philo	5	is thinking
+0		philo	3	is thinking
+0		philo	3	has taken L fork
+0		philo	3	has taken R fork
+0		philo	3	is eating
+0		philo	2	is thinking
+0		philo	4	is thinking
+0		philo	4	has taken L fork
+150		philo	1	is sleeping
+150		philo	3	is sleeping
+150		philo	5	has taken L fork
+150		philo	2	has taken L fork
+150		philo	2	has taken R fork
+150		philo	2	is eating
+150		philo	4	has taken R fork
+150		philo	4	is eating
+300		philo	2	is sleeping
+300		philo	4	is sleeping
+300		philo	5	has taken R fork
+300		philo	5	is eating
+350		philo	1	is thinking
+350		philo	1	has taken L fork
+350		philo	3	is thinking
+350		philo	3	has taken L fork
+350		philo	3	has taken R fork
+350		philo	3	is eating
+450		philo	5	is sleeping
+450		philo	1	has taken R fork
+450		philo	1	is eating
+500		philo	4	is thinking
+500		philo	4	has taken L fork
+500		philo	2	is thinking
+500		philo	2	has taken L fork
+500		philo	4	has taken R fork
+500		philo	4	is eating
+500		philo	3	is sleeping
+600		philo	1	is sleeping
+600		philo	2	has taken R fork
+600		philo	2	is eating
+650		philo	4	is sleeping
+650		philo	5	is thinking
+650		philo	5	has taken L fork
+650		philo	5	has taken R fork
+650		philo	5	is eating
+700		philo	3	is thinking
+700		philo	3	has taken L fork
+750		philo	2	is sleeping
+750		philo	3	has taken R fork
+750		philo	3	is eating
+800		philo	5	is sleeping
+800		philo	1	is thinking
+800		philo	1	has taken L fork
+800		philo	1	has taken R fork
+800		philo	1	is eating
+850		philo	4	is thinking
+850		philo	4	has taken L fork
+900		philo	3	is sleeping
+900		philo	4	has taken R fork
+900		philo	4	is eating
+950		philo	2	is thinking
+950		philo	2	has taken L fork
+950		philo	2	has taken R fork
+950		philo	2	is eating
+950		philo	1	is sleeping
+1000		philo	5	is thinking
+1000		philo	5	has taken L fork
+1050		philo	4	is sleeping
+1050		philo	5	has taken R fork
+1050		philo	5	is eating
+1100		philo	3	is thinking
+1100		philo	3	has taken L fork
+1100		philo	3	has taken R fork
+1100		philo	3	is eating
+1100		philo	2	is sleeping
+1150		philo	1	is thinking
+1150		philo	1	has taken L fork
+1200		philo	5	is sleeping
+1200		philo	1	has taken R fork
+1200		philo	1	is eating
+1250		philo	4	is thinking
+1250		philo	4	has taken L fork
+1250		philo	4	has taken R fork
+1250		philo	4	is eating
+1250		philo	3	is sleeping
+1300		philo	2	is thinking
+1300		philo	2	has taken L fork
+1350		philo	1	is sleeping
+1350		philo	2	has taken R fork
+1350		philo	2	is eating
+1400		philo	4	is sleeping
+1400		philo	5	is thinking
+1400		philo	5	has taken L fork
+1400		philo	5	has taken R fork
+1400		philo	5	is eating
+1450		philo	3	is thinking
+1450		philo	3	has taken L fork
+1500		philo	2	is sleeping
+1500		philo	3	has taken R fork
+1500		philo	3	is eating
+1550		philo	1	is thinking
+1550		philo	1	has taken L fork
+1550		philo	1	has taken R fork
+1550		philo	1	is eating
+1550		philo	5	is sleeping
+1600		philo	4	is thinking
+1600		philo	4	has taken L fork
+1650		philo	3	is sleeping
+1650		philo	4	has taken R fork
+1650		philo	4	is eating
+1700		philo	1	is sleeping
+1700		philo	2	is thinking
+1700		philo	2	has taken L fork
+1700		philo	2	has taken R fork
+1700		philo	2	is eating
+1750		philo	5	is thinking
+1750		philo	5	has taken L fork
+1800		philo	4	is sleeping
+1800		philo	5	has taken R fork
+1800		philo	5	is eating
+1850		philo	3	is thinking
+1850		philo	3	has taken L fork
+1850		philo	2	is sleeping
+1850		philo	3	has taken R fork
+1850		philo	3	is eating
+1900		philo	1	is thinking
+1900		philo	1	has taken L fork
+1950		philo	5	is sleeping
+1950		philo	1	has taken R fork
+1950		philo	1	is eating
+2000		philo	3	is sleeping
+2000		philo	4	is thinking
+2000		philo	4	has taken L fork
+2000		philo	4	has taken R fork
+2000		philo	4	is eating
+2050		philo	2	is thinking
+2050		philo	2	has taken L fork
+2100		philo	1	is sleeping
+2100		philo	2	has taken R fork
+2100		philo	2	is eating
+2150		philo	4	is sleeping
+2150		philo	5	is thinking
+2150		philo	5	has taken L fork
+2150		philo	5	has taken R fork
+2150		philo	5	is eating
+2200		philo	3	is thinking
+2200		philo	3	has taken L fork
+2250		philo	2	is sleeping
+2250		philo	3	has taken R fork
+2250		philo	3	is eating
+2300		philo	5	is sleeping
+2300		philo	1	is thinking
+2300		philo	1	has taken L fork
+2300		philo	1	has taken R fork
+2300		philo	1	is eating
+2350		philo	4	is thinking
+2350		philo	4	has taken L fork
+2400		philo	3	is sleeping
+2400		philo	4	has taken R fork
+2400		philo	4	is eating

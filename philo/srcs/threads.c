@@ -2,26 +2,24 @@
 
 void    *routine(void *param)
 {
-    t_philo             *philo;
+	t_philo             *philo;
 
-    philo = param;
-    if (philo->n % 2 == 1)
-        usleep(WAIT_UNIT_US);
-	// else
-	// 	thinking(philo);			// AVEC VAR last_state
-    while (g_dead == FALSE)
-    {
-		//thinking(philo);
+	philo = param;
+	if (philo->n % 2 == 0)
+		thinking(philo);
+	else
+		usleep(WAIT_UNIT_US);
+	while (g_dead == FALSE)
+	{
+		thinking(philo);
 		eating(philo);
 		sleeping(philo);
-		/*
-        think(philo);
-        eat(philo);
-        drop_forks(philo);
-        sleeping(philo);
-		*/
-    }
-    return (NULL);
+	}
+	if (philo->left_ptr != NULL)
+		pthread_mutex_unlock(philo->left_ptr);
+	if (philo->right_ptr != NULL)
+		pthread_mutex_unlock(philo->right_ptr);
+	return (NULL);
 }
 
 int		start_all_threads(t_philo *philos, int n)
@@ -47,9 +45,11 @@ void	join_all_threads(t_philo *philos, int n)
 	i = 0;
 	while (i < n && (philos + i)->t_init == TRUE)
 	{
-		pthread_join((philos + i)->thr, NULL);
-		//if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
-		//	printf("joined thread %d\n", i);
+		if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
+			;
+		//			printf("joined thread %d\n", i);
+		else
+			printf("couldn't join thread %d\n", i);
 		i++;
 	}
 }
