@@ -75,6 +75,8 @@ void	eating(t_philo *philo)
 	philo->death_time = timestamp + philo->params->die;
 	message(philo, "is eating", FALSE);
 	safe_sleep(timestamp + philo->params->eat);
+	if (philo->must_eat != -1)
+		philo->must_eat--;
 	if (philo->right_ptr != NULL)
 	{
 		pthread_mutex_unlock(philo->right_ptr);

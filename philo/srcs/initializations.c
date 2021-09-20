@@ -18,7 +18,7 @@ static void init_philo(t_philo *philo, int i, t_params *params)
 	philo->right_ptr = NULL;
 	philo->last_eat = 0;
 	philo->death_time = params->die;
-	philo->must_eat = 0;
+	philo->must_eat = params->times;
 	philo->m_init = FALSE;
 	philo->t_init = FALSE;
 	philo->params = params;

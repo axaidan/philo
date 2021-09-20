@@ -9,10 +9,15 @@ void    *routine(void *param)
 		thinking(philo);
 	else
 		usleep(WAIT_UNIT_US);
-	while (g_dead == FALSE)
+	while (g_dead == FALSE && philo->must_eat != 0)
 	{
 		thinking(philo);
 		eating(philo);
+		if (philo->must_eat == 0)
+		{
+			message(philo, "finished eating", FALSE);
+			break ;
+		}
 		sleeping(philo);
 	}
 	if (philo->left_ptr != NULL)
@@ -46,8 +51,8 @@ void	join_all_threads(t_philo *philos, int n)
 	while (i < n && (philos + i)->t_init == TRUE)
 	{
 		if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
+			//printf("joined thread %d\n", i);
 			;
-		//			printf("joined thread %d\n", i);
 		else
 			printf("couldn't join thread %d\n", i);
 		i++;

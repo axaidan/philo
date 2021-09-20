@@ -3,21 +3,31 @@
 void	watcher(t_philo *philos, int n)
 {
 	int			i;
+	int			fully_ate;
 	t_tstamp	timestamp;
 
+	fully_ate = 0;
 	i = 0;
 	while (i < n)
 	{
 		timestamp = get_timestamp();
-		if (timestamp >= (philos + i)->death_time)
+		if (timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0)
 		{
 			g_dead = TRUE;
 			message(philos + i, "died", TRUE);
 			return ;
 		}
+		else if ((philos + i)->must_eat == 0)
+			fully_ate++;
 		i++;
 		if (i == n)
+		{
 			i = 0;
+			if (fully_ate < n)
+				fully_ate = 0;
+			else
+				return ;
+		}
 	}
 }
 
@@ -37,7 +47,7 @@ int	main(int argc, char *argv[])
 	error = init_philos_array(params.n, &params, &philos);
 	if (error)
 		return (error);
-//	display_philos(philos, params.n);
+	//	display_philos(philos, params.n);
 	get_timestamp();	// SET ZERO
 	error = start_all_threads(philos, params.n);
 	if (error)
