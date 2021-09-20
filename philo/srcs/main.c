@@ -12,9 +12,8 @@ void	watcher(t_philo *philos, int n)
 		if (timestamp >= (philos + i)->death_time)
 		{
 			g_dead = TRUE;
-			message(philos + i, "died", timestamp, TRUE);
-//			display(timestamp, n, "is dead");
-			break;
+			message(philos + i, "died", TRUE);
+			return ;
 		}
 		i++;
 		if (i == n)

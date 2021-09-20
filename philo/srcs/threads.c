@@ -5,11 +5,13 @@ void    *routine(void *param)
     t_philo             *philo;
 
     philo = param;
-//	message(philo, "born", get_timestamp());
     if (philo->n % 2 == 1)
-        usleep(1000);
+        usleep(WAIT_UNIT_US);
+	// else
+	// 	thinking(philo);			// AVEC VAR last_state
     while (g_dead == FALSE)
     {
+		//thinking(philo);
 		eating(philo);
 		sleeping(philo);
 		/*
@@ -35,8 +37,6 @@ int		start_all_threads(t_philo *philos, int n)
 		(philos + i)->t_init = TRUE;
 		i++;
 	}
-//	ft_putnbr_fd((int)get_timestamp(), STDOUT_FILENO);
-//	ft_putendl_fd("\tall philos were born", STDOUT_FILENO);
 	return (SUCCESS);
 }
 

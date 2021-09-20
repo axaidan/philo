@@ -22,6 +22,7 @@ static void init_philo(t_philo *philo, int i, t_params *params)
 	philo->m_init = FALSE;
 	philo->t_init = FALSE;
 	philo->params = params;
+	philo->last_state = BORN;
 }
 
 
