@@ -37,11 +37,15 @@ void	eating(t_philo *philo)
 		return ;
 	philo->last_state = ATE;
 	timestamp = get_timestamp();
-	philo->death_time = timestamp + philo->params->die;
+
+	pthread_mutex_lock(philo->race_ptr);
+	philo->death_time = timestamp + philo->params->die; // a proteger contre DR
+	pthread_mutex_unlock(philo->race_ptr);
+
 	message(philo, "is eating", FALSE);
 	safe_sleep(timestamp + philo->params->eat);
 	if (philo->must_eat != -1)
-		philo->must_eat--;
+		philo->must_eat--;								// a proteger contre DR
 	if (philo->right_ptr != NULL)
 	{
 		pthread_mutex_unlock(philo->right_ptr);

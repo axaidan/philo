@@ -23,6 +23,7 @@ static void init_philo(t_philo *philo, int i, t_params *params)
 	philo->t_init = FALSE;
 	philo->params = params;
 	philo->last_state = BORN;
+	philo->race_ptr = NULL;
 }
 
 static int	init_and_grab_own_fork(t_philo **philos_ptr, int n)
@@ -34,8 +35,11 @@ static int	init_and_grab_own_fork(t_philo **philos_ptr, int n)
 	{
 		if (pthread_mutex_init(&(*philos_ptr + i)->left, NULL) != SUCCESS)
 			return (display_ret_system_err(ER_MUT_INIT, *philos_ptr, n));
+		if (pthread_mutex_init(&(*philos_ptr + i)->d_race, NULL) != SUCCESS)
+			return (display_ret_system_err(ER_MUT_INIT, *philos_ptr, n));
 		(*philos_ptr + i)->m_init = TRUE;
 		(*philos_ptr + i)->left_ptr = &(*philos_ptr + i)->left;
+		(*philos_ptr + i)->race_ptr = &(*philos_ptr + i)->d_race;
 		i++;
 	}
 	return (SUCCESS);

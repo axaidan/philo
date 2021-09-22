@@ -14,11 +14,11 @@ void	watcher(t_philo *philos, int n)
 	finished = FALSE;
 	while (finished == FALSE && i < n)
 	{
-		pthread_mutex_lock((philos + i)->left_ptr);
+		pthread_mutex_lock((philos + i)->race_ptr);
 		timestamp = get_timestamp();
 //		if (timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0)
 		finished = timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0;
-		pthread_mutex_unlock((philos + i)->left_ptr);
+		pthread_mutex_unlock((philos + i)->race_ptr);
 		if (finished)
 		{
 			g_dead = TRUE;
