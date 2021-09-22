@@ -1,29 +1,10 @@
 #include "philosophers.h"
 
-void	text_display(int n, char *action)
+static void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
 {
-	ft_putnbr_fd((int)get_timestamp(), STDOUT_FILENO);
-	ft_putstr_fd("\t\tphilo\t", STDOUT_FILENO);
-	ft_putnbr_fd(n, STDOUT_FILENO);
-	ft_putchar_fd('\t', STDOUT_FILENO);
-	ft_putendl_fd(action, STDOUT_FILENO);
-}
-
-void	message(t_philo *philo, char *action, int dead)
-{
-	static int		first = TRUE;
-	static t_mutex	msg_mutex;
-
-	if (first == TRUE)
-	{
-		first = FALSE;
-		if (pthread_mutex_init(&msg_mutex, NULL) != SUCCESS)
-			printf("message mutex initialization error\n");
-	}
-	pthread_mutex_lock(&msg_mutex);
-	if (g_dead == FALSE || dead == TRUE)
-		text_display(philo->n + 1, action);
-	pthread_mutex_unlock(&msg_mutex);
+	pthread_mutex_lock(fork_ptr);
+	message(philo, "has taken a fork", FALSE);
+	philo->forks++;
 }
 
 void	thinking(t_philo *philo)
@@ -35,32 +16,16 @@ void	thinking(t_philo *philo)
 	if (philo->n % 2 == 0)
 	{
 		if (philo->right_ptr != NULL)
-		{
-			pthread_mutex_lock(philo->right_ptr);
-			message(philo, "has taken R fork", FALSE);
-			philo->forks++;
-		}
+			grab_fork(philo, philo->right_ptr);
 		if (philo->left_ptr != NULL)
-		{
-			pthread_mutex_lock(philo->left_ptr);
-			message(philo, "has taken L fork", FALSE);
-			philo->forks++;
-		}
+			grab_fork(philo, philo->left_ptr);
 	}
 	else
 	{
 		if (philo->left_ptr != NULL)
-		{
-			pthread_mutex_lock(philo->left_ptr);
-			message(philo, "has taken L fork", FALSE);
-			philo->forks++;
-		}
+			grab_fork(philo, philo->left_ptr);
 		if (philo->right_ptr != NULL)
-		{
-			pthread_mutex_lock(philo->right_ptr);
-			message(philo, "has taken R fork", FALSE);
-			philo->forks++;
-		}
+			grab_fork(philo, philo->right_ptr);
 	}
 }
 

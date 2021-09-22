@@ -31,21 +31,23 @@ int     check_fork_assignment(t_philo *philos, int n)
 		if (i == n - 1)
 		{
 			if ((philos + i)->right_ptr == philos->left_ptr)
-				printf("philos\t%d\tand\t%d\tshare a fork\n", i + 1, 1);
+				;
+//				printf("philos\t%d\tand\t%d\tshare a fork\n", i + 1, 1);
 			else
 			{
 				printf("philos\t%d\tand\t%d\tdon't share a fork\n", i + 1, 1);
-//				return (FALSE);
+				return (FALSE);
 			}
 		}
 		else
 		{
 			if ((philos + i)->right_ptr == (philos + i + 1)->left_ptr)
-				printf("philos\t%d\tand\t%d\tshare a fork\n", i + 1, i + 2);
+				;
+//				printf("philos\t%d\tand\t%d\tshare a fork\n", i + 1, i + 2);
 			else
 			{
 				printf("philos\t%d\tand\t%d\tdon't share a fork\n", i + 1, i + 2);
-//				return (FALSE);
+				return (FALSE);
 			}
 		}
 		i++;

@@ -6,7 +6,7 @@ void	safe_sleep(t_tstamp until)
 		usleep(WAIT_UNIT_US);
 }
 
-long unsigned int   get_timestamp(void)
+t_tstamp   get_timestamp(void)
 {
 	static int			first = TRUE;
 	static t_timeval	zero;

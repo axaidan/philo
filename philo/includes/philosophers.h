@@ -34,6 +34,8 @@ int		init_philos_array(int n, t_params *params, t_philo **philos_ptr);
 void	thinking(t_philo *philo);
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);
+
+/*	display.c */
 void	message(t_philo *philo, char *action, int dead);
 void	text_display(int n, char *action);
 

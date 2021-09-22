@@ -40,6 +40,8 @@ static int	check_overflow(int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
+		while (*(argv[i]) == '0')
+			argv[i]++;
 		len = ft_strlen(argv[i]);
 		if (len > 10)
 			return (FAILURE);

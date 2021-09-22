@@ -11,6 +11,7 @@ SRCS		=	debug.c \
 				time.c \
 				threads.c \
 				actions.c \
+				display.c \
 				libft/ft_putstr_fd.c \
 				libft/ft_putchar_fd.c \
 				libft/ft_putendl_fd.c \
@@ -28,7 +29,7 @@ OBJS		=	${addprefix srcs/, ${SRCS:.c=.o}}
 
 CC			=	gcc
 
-E_FLAGS		=	-Wall -Werror -Wextra
+E_FLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
 
 I_FLD		=	includes/
 

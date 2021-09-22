@@ -25,9 +25,40 @@ static void init_philo(t_philo *philo, int i, t_params *params)
 	philo->last_state = BORN;
 }
 
+static int	init_and_grab_own_fork(t_philo **philos_ptr, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (pthread_mutex_init(&(*philos_ptr + i)->left, NULL) != SUCCESS)
+			return (display_ret_system_err(ER_MUT_INIT, *philos_ptr, n));
+		(*philos_ptr + i)->m_init = TRUE;
+		(*philos_ptr + i)->left_ptr = &(*philos_ptr + i)->left;
+		i++;
+	}
+	return (SUCCESS);
+}
+
+static void	grab_neighbor_s_fork(t_philo **philos_ptr, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (i < n - 1)
+			(*philos_ptr + i)->right_ptr = (*philos_ptr + i + 1)->left_ptr;
+		i++;
+	}
+	(*philos_ptr + n - 1)->right_ptr = (*philos_ptr)->left_ptr;
+}
+
 int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 {
 	int	i;
+	int	error;
 
 	*philos_ptr = malloc(sizeof(t_philo) * n);
 	if (*philos_ptr == NULL)
@@ -38,25 +69,12 @@ int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 		init_philo(*philos_ptr + i, i, params);
 		i++;
 	}
-	i = 0;
-	while (i < n)
-	{
-		if (pthread_mutex_init(&(*philos_ptr + i)->left, NULL) != SUCCESS)
-			return (display_ret_system_err(ER_MUT_INIT, *philos_ptr, n));
-		(*philos_ptr + i)->m_init = TRUE;
-		(*philos_ptr + i)->left_ptr = &(*philos_ptr + i)->left;
-		i++;
-	}
+	error = init_and_grab_own_fork(philos_ptr, n);
+	if (error)
+		return (error);
 	if (n == 1)
 		return (SUCCESS);
-	i = 0;
-	while (i < n)
-	{
-		if (i < n - 1)
-			(*philos_ptr + i)->right_ptr = (*philos_ptr + i + 1)->left_ptr;
-		i++;
-	}
-	(*philos_ptr + n - 1)->right_ptr = (*philos_ptr)->left_ptr;
-	check_fork_assignment(*philos_ptr, n);
+	grab_neighbor_s_fork(philos_ptr, n);
+	check_fork_assignment(*philos_ptr, n);			// DEBUG //
 	return (SUCCESS);
 }

@@ -31,6 +31,8 @@ typedef struct	s_philo
 	t_mutex			left;	
 	t_mutex			*left_ptr;
 	t_mutex			*right_ptr;
+	t_mutex			d_race;
+	t_mutex			*race_ptr;
 	t_tstamp		last_eat;
 	t_tstamp		death_time;
 	int				must_eat;
@@ -40,6 +42,6 @@ typedef struct	s_philo
 	int				last_state;
 }				t_philo;
 
-int	g_dead;
+extern int	g_dead;
 
 #endif
