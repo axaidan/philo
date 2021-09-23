@@ -14,11 +14,10 @@ void	watcher(t_philo *philos, int n)
 	finished = FALSE;
 	while (finished == FALSE && i < n)
 	{
-		pthread_mutex_lock((philos + i)->race_ptr);
 		timestamp = get_timestamp();
-//		if (timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0)
+		pthread_mutex_lock((philos + i)->race_ptr);
 		finished = timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0;
-		pthread_mutex_unlock((philos + i)->race_ptr);
+
 		if (finished)
 		{
 			g_dead = TRUE;
@@ -27,6 +26,7 @@ void	watcher(t_philo *philos, int n)
 		}
 		else if ((philos + i)->must_eat == 0)
 			fully_ate++;
+		pthread_mutex_unlock((philos + i)->race_ptr);
 		i++;
 		if (i == n)
 		{
@@ -45,8 +45,6 @@ int	main(int argc, char *argv[])
 	t_params	params;
 	t_philo		*philos;
 
-	printf("sizeof(t_mutex) = %lu\n", sizeof(t_mutex));
-	printf("sizeof(t_thread) = %lu\n", sizeof(t_thread));
 	g_dead = FALSE;
 	init_params(&params);
 	error = parsing(argc, argv, &params);
