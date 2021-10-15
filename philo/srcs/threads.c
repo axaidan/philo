@@ -9,6 +9,9 @@ void    *routine(void *param)
 		thinking(philo);
 	else
 		usleep(WAIT_UNIT_US);
+	// LOCK philo->d_race
+	// CHECK g_dead BEFORE LOOP
+	// UNLOCK philo->d_race
 	while (g_dead == FALSE && philo->must_eat != 0)
 	{
 		thinking(philo);
@@ -19,6 +22,9 @@ void    *routine(void *param)
 			break ;
 		}
 		sleeping(philo);
+		// LOCK philo->d_race
+		// CHECK g_dead BEFORE LOOP
+		// UNLOCK philo->d_race
 	}
 	if (philo->left_ptr != NULL)
 		pthread_mutex_unlock(philo->left_ptr);
@@ -51,8 +57,7 @@ void	join_all_threads(t_philo *philos, int n)
 	while (i < n && (philos + i)->t_init == TRUE)
 	{
 		if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
-			//printf("joined thread %d\n", i);
-			;
+			printf("joined thread %d\n", i);
 		else
 			printf("couldn't join thread %d\n", i);
 		i++;

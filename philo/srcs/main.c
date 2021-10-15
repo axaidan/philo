@@ -15,18 +15,20 @@ void	watcher(t_philo *philos, int n)
 	while (finished == FALSE && i < n)
 	{
 		timestamp = get_timestamp();
+
 		pthread_mutex_lock((philos + i)->race_ptr);
 		finished = timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0;
-
 		if (finished)
 		{
 			g_dead = TRUE;
 			message(philos + i, "died", TRUE);
+			pthread_mutex_unlock((philos + i)->race_ptr);
 			return ;
 		}
 		else if ((philos + i)->must_eat == 0)
 			fully_ate++;
 		pthread_mutex_unlock((philos + i)->race_ptr);
+
 		i++;
 		if (i == n)
 		{
@@ -37,6 +39,7 @@ void	watcher(t_philo *philos, int n)
 				return ;
 		}
 	}
+	printf("watcher exiting");
 }
 
 int	main(int argc, char *argv[])
