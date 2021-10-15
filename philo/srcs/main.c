@@ -39,7 +39,6 @@ void	watcher(t_philo *philos, int n)
 				return ;
 		}
 	}
-	printf("watcher exiting");
 }
 
 int	main(int argc, char *argv[])

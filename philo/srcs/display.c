@@ -26,4 +26,3 @@ void    message(t_philo *philo, char *action, int dead)
 		text_display(philo->n + 1, action);
 	pthread_mutex_unlock(&msg_mutex);
 }
-
