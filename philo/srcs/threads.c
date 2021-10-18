@@ -19,14 +19,16 @@ void    *routine(void *param)
 	finished = g_dead == FALSE && philo->must_eat != 0;
 	pthread_mutex_unlock(philo->race_ptr);
 	*/
+	pthread_mutex_lock(philo->race_ptr);
 	while (g_dead == FALSE && philo->must_eat != 0)
 //	while (finished == TRUE)
 	{
+		pthread_mutex_unlock(philo->race_ptr);
 		thinking(philo);
 		eating(philo);
 		if (philo->must_eat == 0)
 		{
-			message(philo, "finished eating", FALSE);
+//			message(philo, "finished eating", FALSE);
 			break ;
 		}
 		sleeping(philo);
@@ -38,11 +40,12 @@ void    *routine(void *param)
 		finished = g_dead == FALSE && philo->must_eat != 0;
 		pthread_mutex_unlock(philo->race_ptr);
 		*/
+		pthread_mutex_lock(philo->race_ptr);
 	}
 	if (philo->left_ptr != NULL)
 		pthread_mutex_unlock(philo->left_ptr);
-//	if (philo->right_ptr != NULL)
-//		pthread_mutex_unlock(philo->right_ptr);
+	if (philo->right_ptr != NULL)
+		pthread_mutex_unlock(philo->right_ptr);
 	pthread_mutex_unlock(philo->race_ptr);
 
 	return (NULL);

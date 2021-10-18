@@ -3,9 +3,11 @@
 void    text_display(int n, char *action)
 {
 	ft_putnbr_fd((int)get_timestamp(), STDOUT_FILENO);
-	ft_putstr_fd("\t\tphilo\t", STDOUT_FILENO);
+//	ft_putstr_fd("\t\tphilo\t", STDOUT_FILENO);
+//	ft_putstr_fd("\t", STDOUT_FILENO);
+	ft_putchar_fd(' ', STDOUT_FILENO);
 	ft_putnbr_fd(n, STDOUT_FILENO);
-	ft_putchar_fd('\t', STDOUT_FILENO);
+	ft_putchar_fd(' ', STDOUT_FILENO);
 	ft_putendl_fd(action, STDOUT_FILENO);
 }
 

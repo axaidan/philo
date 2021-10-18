@@ -71,4 +71,5 @@ void	sleeping(t_philo *philo)
 	message(philo, "is sleeping", FALSE);
 	safe_sleep(get_timestamp() + philo->params->slp);
 	message(philo, "is thinking", FALSE);
+	usleep(WAIT_UNIT_US);
 }
