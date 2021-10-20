@@ -1,12 +1,11 @@
 #include "philosophers.h"
 
-int	g_dead;
-
-void	watcher(t_philo *philos, int n)
+void	watcher(t_philo *philos, int n, int *death)
 {
 	int			i;
 	int			fully_ate;
 	int			finished;
+	int			eating_continues;	
 	t_tstamp	timestamp;
 
 	fully_ate = 0;
@@ -17,17 +16,20 @@ void	watcher(t_philo *philos, int n)
 		timestamp = get_timestamp();
 
 		pthread_mutex_lock((philos + i)->race_ptr);
-		finished = timestamp >= (philos + i)->death_time && (philos + i)->must_eat != 0;
+		eating_continues = (philos + i)->must_eat != 0;
+		finished = timestamp >= (philos + i)->death_time && eating_continues;
+		pthread_mutex_unlock((philos + i)->race_ptr);
 		if (finished)
 		{
-			g_dead = TRUE;
+			pthread_mutex_lock(&(philos + i)->params->death_mutex);
+			*death = TRUE;
+			pthread_mutex_unlock(&(philos + i)->params->death_mutex);
 			message(philos + i, "died", TRUE);
-			pthread_mutex_unlock((philos + i)->race_ptr);
+		//	pthread_mutex_unlock((philos + i)->race_ptr);
 			return ;
 		}
-		else if ((philos + i)->must_eat == 0)
+		else if (eating_continues == FALSE)
 			fully_ate++;
-		pthread_mutex_unlock((philos + i)->race_ptr);
 
 		i++;
 		if (i == n)
@@ -47,7 +49,6 @@ int	main(int argc, char *argv[])
 	t_params	params;
 	t_philo		*philos;
 
-	g_dead = FALSE;
 	init_params(&params);
 	error = parsing(argc, argv, &params);
 	if (error)
@@ -63,7 +64,7 @@ int	main(int argc, char *argv[])
 	error = start_all_threads(philos, params.n);
 	if (error)
 		return (error);
-	watcher(philos, params.n);
+	watcher(philos, params.n, &params.death);
 	join_all_threads(philos, params.n);
 	destroy_all(philos, params.n);
 	return (100);

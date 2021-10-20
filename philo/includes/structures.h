@@ -8,11 +8,13 @@ typedef long unsigned int	t_tstamp;
 
 typedef struct	s_params
 {
-	int	n;
-	int	die;
-	int	eat;
-	int	slp;
-	int	times;
+	int		n;
+	int		die;
+	int		eat;
+	int		slp;
+	int		times;
+	int		death;
+	t_mutex	death_mutex;
 }				t_params;
 
 enum	e_last_state

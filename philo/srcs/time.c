@@ -1,15 +1,19 @@
 #include "philosophers.h"
 
+int	death_occured(t_philo *philo)
+{
+	int	dead;
+
+	pthread_mutex_lock(&philo->params->death_mutex);
+	dead = philo->params->death;
+	pthread_mutex_unlock(&philo->params->death_mutex);
+	return (dead);
+}
+
 void	safe_sleep(t_tstamp until, t_philo *philo)
 {
-	pthread_mutex_lock(philo->race_ptr);
-	while (get_timestamp() < until && g_dead == FALSE)
-	{
-		pthread_mutex_unlock(philo->race_ptr);
+	while (get_timestamp() < until && death_occured(philo) == FALSE)
 		usleep(WAIT_UNIT_US);
-		pthread_mutex_lock(philo->race_ptr);
-	}
-	pthread_mutex_unlock(philo->race_ptr);
 }
 
 /*

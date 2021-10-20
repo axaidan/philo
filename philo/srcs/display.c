@@ -23,8 +23,10 @@ void    message(t_philo *philo, char *action, int dead)
 			printf("message mutex initialization error\n");
 		return ;
 	}
+	if (death_occured(philo) == FALSE || dead == TRUE)
+	{
 	pthread_mutex_lock(&msg_mutex);
-	if (g_dead == FALSE || dead == TRUE)
 		text_display(philo->n + 1, action);
 	pthread_mutex_unlock(&msg_mutex);
+	}
 }

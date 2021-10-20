@@ -33,6 +33,7 @@ int		init_philos_array(int n, t_params *params, t_philo **philos_ptr);
 /*	actions.c */
 void	thinking(t_philo *philo);
 void	eating(t_philo *philo);
+void	drop_forks(t_philo *philo);
 void	sleeping(t_philo *philo);
 
 /*	display.c */
@@ -53,6 +54,7 @@ size_t	ft_strlen(const char *s);
 t_tstamp	get_timestamp(void);
 //void		safe_sleep(t_tstamp until);
 void		safe_sleep(t_tstamp until, t_philo *philo);
+int			death_occured(t_philo *philo);
 
 /*	threads.c */
 void	join_all_threads(t_philo *philos, int n);

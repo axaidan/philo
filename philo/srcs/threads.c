@@ -11,21 +11,24 @@ void    *routine(void *param)
 //		usleep(WAIT_UNIT_US);
 	
 	pthread_mutex_lock(philo->race_ptr);
-	while (g_dead == FALSE && philo->must_eat != 0)
+//	while (philo->params->death == FALSE && philo->must_eat != 0)
+	while (death_occured(philo) == FALSE && philo->must_eat != 0)
 	{
 		pthread_mutex_unlock(philo->race_ptr);
 		thinking(philo);
 		eating(philo);
-		if (philo->must_eat == 0)
-			break ;
+		drop_forks(philo);
+//		if (philo->must_eat == 0)
+//			break ;
 		sleeping(philo);
 		pthread_mutex_lock(philo->race_ptr);
 	}
-	if (philo->left_ptr != NULL)
-		pthread_mutex_unlock(philo->left_ptr);
+	pthread_mutex_unlock(philo->race_ptr);
+//	if (philo->left_ptr != NULL)
+//		pthread_mutex_unlock(philo->left_ptr);
 //	if (philo->right_ptr != NULL)
 //		pthread_mutex_unlock(philo->right_ptr);
-	pthread_mutex_unlock(philo->race_ptr);
+//	pthread_mutex_unlock(philo->race_ptr);
 
 	return (NULL);
 }
@@ -40,7 +43,7 @@ int		start_all_threads(t_philo *philos, int n)
 		if (pthread_create(&(philos + i)->thr, NULL, routine, philos + i)
 				!= SUCCESS)
 			return (display_ret_system_err(ER_THR_CREA, philos, n));
-		if (i == 0)		// modif
+		if (i == 0)			// modif
 			usleep(100);	// modif
 		(philos + i)->t_init = TRUE;
 		i++;

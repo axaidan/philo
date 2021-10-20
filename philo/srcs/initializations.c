@@ -7,6 +7,7 @@ void	init_params(t_params *params)
 	params->eat = 0;
 	params->slp = 0;
 	params->times = -1;
+	params->death = FALSE;
 }
 
 static void init_philo(t_philo *philo, int i, t_params *params)
@@ -67,6 +68,7 @@ int		init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 	*philos_ptr = malloc(sizeof(t_philo) * n);
 	if (*philos_ptr == NULL)
 		return (display_ret_system_err(ER_ARR_ALC, *philos_ptr, n));
+	pthread_mutex_init(&params->death_mutex, NULL);	//+ control
 	i = 0;
 	while (i < n)
 	{
