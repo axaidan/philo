@@ -24,7 +24,7 @@ void	watcher(t_philo *philos, int n, int *death)
 			pthread_mutex_lock(&(philos + i)->params->death_mutex);
 			*death = TRUE;
 			pthread_mutex_unlock(&(philos + i)->params->death_mutex);
-			message(philos + i, "died", TRUE);
+			message(philos + i, "died", TRUE, FALSE);
 		//	pthread_mutex_unlock((philos + i)->race_ptr);
 			return ;
 		}
@@ -58,14 +58,14 @@ int	main(int argc, char *argv[])
 	error = init_philos_array(params.n, &params, &philos);
 	if (error)
 		return (error);
-	//	display_philos(philos, params.n);
-	message(NULL, NULL, FALSE);
-	get_timestamp();	// SET ZERO
+//	display_philos(philos, params.n);
+	message(NULL, NULL, FALSE, FALSE);	// INIT static t_mutex msg_mutex;
+	get_timestamp();					// SET ZERO
 	error = start_all_threads(philos, params.n);
 	if (error)
 		return (error);
 	watcher(philos, params.n, &params.death);
 	join_all_threads(philos, params.n);
 	destroy_all(philos, params.n);
-	return (100);
+	return (SUCCESS);
 }

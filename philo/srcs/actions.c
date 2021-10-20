@@ -3,7 +3,7 @@
 static void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
 {
 	pthread_mutex_lock(fork_ptr);
-	message(philo, "has taken a fork", FALSE);
+	message(philo, "has taken a fork", FALSE, FALSE);
 	philo->forks++;
 }
 
@@ -37,7 +37,7 @@ void	eating(t_philo *philo)
 		return ;
 
 	philo->last_state = ATE;
-	message(philo, "is eating", FALSE);
+	message(philo, "is eating", FALSE, FALSE);
 	timestamp = get_timestamp();
 
 	pthread_mutex_lock(philo->race_ptr);
@@ -78,7 +78,6 @@ void	drop_forks(t_philo *philo)
 		pthread_mutex_unlock(philo->left_ptr);
 		philo->forks--;
 	}
-
 }
 
 void	sleeping(t_philo *philo)
@@ -86,9 +85,9 @@ void	sleeping(t_philo *philo)
 	if (philo->last_state != ATE || philo->forks != 0 || philo->must_eat == 0)
 		return ;
 	philo->last_state = SLEPT;
-	message(philo, "is sleeping", FALSE);
+	message(philo, "is sleeping", FALSE, FALSE);
 	safe_sleep(get_timestamp() + philo->params->slp, philo);
 //	safe_sleep(get_timestamp() + philo->params->slp);
-	message(philo, "is thinking", FALSE);
+	message(philo, "is thinking", FALSE, FALSE);
 	usleep(WAIT_UNIT_US);
 }

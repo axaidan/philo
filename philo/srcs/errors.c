@@ -28,9 +28,10 @@ void	destroy_all(t_philo *philos, int n)
 	{
 		pthread_mutex_destroy(&(philos + i)->left);
 		pthread_mutex_destroy((philos + i)->race_ptr);
-//		printf("destroyed mutex %d\n", i);
 		i++;
 	}
+	pthread_mutex_destroy(&philos->params->death_mutex);
+	message(NULL, NULL, FALSE, TRUE);
 	free(philos);
 }
 
