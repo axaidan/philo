@@ -23,8 +23,8 @@ OBJS		=	${addprefix srcs/, ${SRCS:.c=.o}}
 
 CC			=	gcc
 
-E_FLAGS		=	-Wall -Werror -Wextra 
-#E_FLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
+#E_FLAGS		=	-Wall -Werror -Wextra 
+E_FLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
 
 I_FLD		=	includes/
 

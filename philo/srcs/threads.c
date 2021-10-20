@@ -24,6 +24,8 @@ void    *routine(void *param)
 		pthread_mutex_lock(philo->race_ptr);
 	}
 	pthread_mutex_unlock(philo->race_ptr);
+	if (philo->params->n == 1)
+		pthread_mutex_unlock(philo->left_ptr);
 //	if (philo->left_ptr != NULL)
 //		pthread_mutex_unlock(philo->left_ptr);
 //	if (philo->right_ptr != NULL)
