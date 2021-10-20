@@ -1,10 +1,24 @@
 #include "philosophers.h"
 
+void	safe_sleep(t_tstamp until, t_philo *philo)
+{
+	pthread_mutex_lock(philo->race_ptr);
+	while (get_timestamp() < until && g_dead == FALSE)
+	{
+		pthread_mutex_unlock(philo->race_ptr);
+		usleep(WAIT_UNIT_US);
+		pthread_mutex_lock(philo->race_ptr);
+	}
+	pthread_mutex_unlock(philo->race_ptr);
+}
+
+/*
 void	safe_sleep(t_tstamp until)
 {
 	while (get_timestamp() < until)
 		usleep(WAIT_UNIT_US);
 }
+*/
 
 t_tstamp   get_timestamp(void)
 {

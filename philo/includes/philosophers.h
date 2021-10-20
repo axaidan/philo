@@ -51,7 +51,8 @@ size_t	ft_strlen(const char *s);
 
 /*	time.c */
 t_tstamp	get_timestamp(void);
-void		safe_sleep(t_tstamp until);
+//void		safe_sleep(t_tstamp until);
+void		safe_sleep(t_tstamp until, t_philo *philo);
 
 /*	threads.c */
 void	join_all_threads(t_philo *philos, int n);

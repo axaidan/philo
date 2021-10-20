@@ -1,8 +1,6 @@
 # NAME MUST BE CHANGED BEFORE SUBMITTING
 NAME		=	philosophers
 
-#B_NAME		=	pipex_bonus
-
 SRCS		=	debug.c \
 				main.c \
 				parsing.c \
@@ -21,11 +19,7 @@ SRCS		=	debug.c \
 				libft/ft_isdigit.c \
 				libft/ft_strlen.c
 
-#B_SRCS		=	main_bonus.c \
-
 OBJS		=	${addprefix srcs/, ${SRCS:.c=.o}}
-
-#B_OBJS		=	${addprefix srcs/bonus/, ${B_SRCS:.c=.o}}
 
 CC			=	gcc
 
@@ -44,11 +38,6 @@ all			:	${NAME}
 
 ${NAME}		:	${OBJS}
 			${CC} ${E_FLAGS} ${OBJS} -o ${NAME} -lpthread
-
-#bonus		:	${B_NAME}
-
-#${B_NAME}	:	${B_OBJS}
-#			${CC} ${E_FLAGS} ${B_OBJS} -o ${B_NAME}
 
 %.o			:	%.c ${I_FLD}philosophers.h ${I_FLD}defines.h ${I_FLD}structures.h
 			${CC} ${E_FLAGS} ${I_FLAGS} -c $< -o ${<:.c=.o}

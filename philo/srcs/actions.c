@@ -44,7 +44,7 @@ void	eating(t_philo *philo)
 	philo->death_time = timestamp + philo->params->die; // a proteger contre DR
 	pthread_mutex_unlock(philo->race_ptr);
 
-	safe_sleep(timestamp + philo->params->eat);
+	safe_sleep(timestamp + philo->params->eat, philo);
 
 	pthread_mutex_lock(philo->race_ptr);
 	if (philo->must_eat != -1)							// a proteger contre DR
@@ -69,7 +69,7 @@ void	sleeping(t_philo *philo)
 		return ;
 	philo->last_state = SLEPT;
 	message(philo, "is sleeping", FALSE);
-	safe_sleep(get_timestamp() + philo->params->slp);
+	safe_sleep(get_timestamp() + philo->params->slp, philo);
 	message(philo, "is thinking", FALSE);
 	usleep(WAIT_UNIT_US);
 }
