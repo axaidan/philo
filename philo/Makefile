@@ -1,5 +1,5 @@
 # NAME MUST BE CHANGED BEFORE SUBMITTING
-NAME		=	philosophers
+NAME		=	philo
 
 SRCS		=	debug.c \
 				main.c \
@@ -23,17 +23,14 @@ OBJS		=	${addprefix srcs/, ${SRCS:.c=.o}}
 
 CC			=	gcc
 
-#E_FLAGS		=	-Wall -Werror -Wextra 
-E_FLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
+E_FLAGS		=	-Wall -Werror -Wextra 
+#E_FLAGS		=	-Wall -Werror -Wextra -g -fsanitize=thread
 
 I_FLD		=	includes/
 
 I_FLAGS		=	-I ${I_FLD}
 
 all			:	${NAME}
-			@echo "====================================================="
-			@echo "DON'T FORGET TO CHANGE PROGRAM NAME BEFORE SUBMITTING"
-			@echo "====================================================="
 
 
 ${NAME}		:	${OBJS}
