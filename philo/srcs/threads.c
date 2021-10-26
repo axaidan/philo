@@ -1,41 +1,27 @@
 #include "philosophers.h"
 
-void    *routine(void *param)
+void	*routine(void *param)
 {
 	t_philo	*philo;
 
 	philo = param;
-//	if (philo->n % 2 == 0)
-//		thinking(philo);
-//	else
-//		usleep(WAIT_UNIT_US);
-	
 	pthread_mutex_lock(philo->race_ptr);
-//	while (philo->params->death == FALSE && philo->must_eat != 0)
 	while (death_occured(philo) == FALSE && philo->must_eat != 0)
 	{
 		pthread_mutex_unlock(philo->race_ptr);
 		thinking(philo);
 		eating(philo);
 		drop_forks(philo);
-//		if (philo->must_eat == 0)
-//			break ;
 		sleeping(philo);
 		pthread_mutex_lock(philo->race_ptr);
 	}
 	pthread_mutex_unlock(philo->race_ptr);
 	if (philo->params->n == 1)
 		pthread_mutex_unlock(philo->left_ptr);
-//	if (philo->left_ptr != NULL)
-//		pthread_mutex_unlock(philo->left_ptr);
-//	if (philo->right_ptr != NULL)
-//		pthread_mutex_unlock(philo->right_ptr);
-//	pthread_mutex_unlock(philo->race_ptr);
-
 	return (NULL);
 }
 
-int		start_all_threads(t_philo *philos, int n)
+int	start_all_threads(t_philo *philos, int n)
 {
 	int	i;
 
@@ -43,10 +29,10 @@ int		start_all_threads(t_philo *philos, int n)
 	while (i < n)
 	{
 		if (pthread_create(&(philos + i)->thr, NULL, routine, philos + i)
-				!= SUCCESS)
+			!= SUCCESS)
 			return (display_ret_system_err(ER_THR_CREA, philos, n));
-		if (i == 0)			// modif
-			usleep(100);	// modif
+		if (i == 0)
+			usleep(WAIT_UNIT_US);
 		(philos + i)->t_init = TRUE;
 		i++;
 	}
@@ -60,10 +46,7 @@ void	join_all_threads(t_philo *philos, int n)
 	i = 0;
 	while (i < n && (philos + i)->t_init == TRUE)
 	{
-		if (pthread_join((philos + i)->thr, NULL) == SUCCESS)
-//			printf("joined thread %d\n", i);
-			;
-		else
+		if (pthread_join((philos + i)->thr, NULL) != SUCCESS)
 			printf("couldn't join thread %d\n", i);
 		i++;
 	}

@@ -10,7 +10,7 @@ static void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
 void	thinking(t_philo *philo)
 {
 	if ((philo->last_state != SLEPT && philo->last_state != BORN)
-			|| philo->forks != 0)
+		|| philo->forks != 0)
 		return ;
 	philo->last_state = THOUGHT;
 	if (philo->n % 2 == 0)
@@ -35,35 +35,17 @@ void	eating(t_philo *philo)
 
 	if (philo->last_state != THOUGHT || philo->forks != 2)
 		return ;
-
 	philo->last_state = ATE;
 	message(philo, "is eating", FALSE, FALSE);
 	timestamp = get_timestamp();
-
 	pthread_mutex_lock(philo->race_ptr);
-	philo->death_time = timestamp + philo->params->die; // a proteger contre DR
+	philo->death_time = timestamp + philo->params->die;
 	pthread_mutex_unlock(philo->race_ptr);
-
 	safe_sleep(timestamp + philo->params->eat, philo);
-//	safe_sleep(timestamp + philo->params->eat);
-
 	pthread_mutex_lock(philo->race_ptr);
-	if (philo->must_eat != -1)							// a proteger contre DR
-		philo->must_eat--;								// a proteger contre DR
+	if (philo->must_eat != -1)
+		philo->must_eat--;
 	pthread_mutex_unlock(philo->race_ptr);
-
-	/*
-	if (philo->right_ptr != NULL)
-	{
-		pthread_mutex_unlock(philo->right_ptr);
-		philo->forks--;
-	}
-	if (philo->left_ptr != NULL)
-	{
-		pthread_mutex_unlock(philo->left_ptr);
-		philo->forks--;
-	}
-	*/
 }
 
 void	drop_forks(t_philo *philo)
@@ -87,7 +69,6 @@ void	sleeping(t_philo *philo)
 	philo->last_state = SLEPT;
 	message(philo, "is sleeping", FALSE, FALSE);
 	safe_sleep(get_timestamp() + philo->params->slp, philo);
-//	safe_sleep(get_timestamp() + philo->params->slp);
 	message(philo, "is thinking", FALSE, FALSE);
 	usleep(WAIT_UNIT_US);
 }

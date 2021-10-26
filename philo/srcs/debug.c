@@ -21,19 +21,16 @@ void	display_philos(t_philo *philos_arr, int n)
 	}	
 }
 
-int     check_fork_assignment(t_philo *philos, int n)
+int	check_fork_assignment(t_philo *philos, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n)
 	{
 		if (i == n - 1)
 		{
-			if ((philos + i)->right_ptr == philos->left_ptr)
-				;
-//				printf("philos\t%d\tand\t%d\tshare a fork\n", i + 1, 1);
-			else
+			if ((philos + i)->right_ptr != philos->left_ptr)
 			{
 				printf("philos\t%d\tand\t%d\tdon't share a fork\n", i + 1, 1);
 				return (FALSE);
@@ -41,10 +38,7 @@ int     check_fork_assignment(t_philo *philos, int n)
 		}
 		else
 		{
-			if ((philos + i)->right_ptr == (philos + i + 1)->left_ptr)
-				;
-//				printf("philos\t%d\tand\t%d\tshare a fork\n", i + 1, i + 2);
-			else
+			if ((philos + i)->right_ptr != (philos + i + 1)->left_ptr)
 			{
 				printf("philos\t%d\tand\t%d\tdon't share a fork\n", i + 1, i + 2);
 				return (FALSE);

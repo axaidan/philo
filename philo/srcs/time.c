@@ -16,15 +16,7 @@ void	safe_sleep(t_tstamp until, t_philo *philo)
 		usleep(WAIT_UNIT_US);
 }
 
-/*
-void	safe_sleep(t_tstamp until)
-{
-	while (get_timestamp() < until)
-		usleep(WAIT_UNIT_US);
-}
-*/
-
-t_tstamp   get_timestamp(void)
+t_tstamp	get_timestamp(void)
 {
 	static int			first = TRUE;
 	static t_timeval	zero;
