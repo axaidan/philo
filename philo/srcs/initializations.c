@@ -14,7 +14,7 @@ static void	init_philo(t_philo *philo, int i, t_params *params)
 {
 	philo->thr = 0;
 	philo->n = i;
-	philo->forks = 0;
+//	philo->forks = 0;
 	philo->left_ptr = NULL;
 	philo->right_ptr = NULL;
 	philo->last_eat = 0;
@@ -23,7 +23,7 @@ static void	init_philo(t_philo *philo, int i, t_params *params)
 	philo->m_init = FALSE;
 	philo->t_init = FALSE;
 	philo->params = params;
-	philo->last_state = BORN;
+//	philo->last_state = BORN;
 	philo->race_ptr = NULL;
 }
 

@@ -1,4 +1,3 @@
-# NAME MUST BE CHANGED BEFORE SUBMITTING
 NAME		=	philo
 
 SRCS		=	debug.c \

@@ -36,8 +36,8 @@ int	start_all_threads(t_philo *philos, int n)
 			pthread_mutex_unlock(&philos->params->death_mutex);
 			return (display_ret_system_err(ER_THR_CREA, philos, n));
 		}
-		if (i == 0)
-			usleep(WAIT_UNIT_US);
+	//if (i == 0)
+	//		usleep(WAIT_UNIT_US);
 		(philos + i)->t_init = TRUE;
 		i++;
 	}
