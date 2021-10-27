@@ -4,3 +4,4 @@ philosophers
 */*.swp
 philo/.Makefile.swp
 a.out
+philo
