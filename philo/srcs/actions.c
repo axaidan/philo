@@ -50,14 +50,24 @@ void	eating(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
-	if (philo->right_ptr != NULL)
+	if (philo->n % 2 == 0 && philo->right_ptr != NULL)
 	{
 		pthread_mutex_unlock(philo->right_ptr);
 		philo->forks--;
 	}
-	if (philo->left_ptr != NULL && philo->params->n != 1)
+	if (philo->n % 2 == 0 && philo->left_ptr != NULL && philo->params->n != 1)
 	{
 		pthread_mutex_unlock(philo->left_ptr);
+		philo->forks--;
+	}
+	if (philo->n % 2 == 1 && philo->left_ptr != NULL && philo->params->n != 1)
+	{
+		pthread_mutex_unlock(philo->left_ptr);
+		philo->forks--;
+	}
+	if (philo->n % 2 == 1 && philo->right_ptr != NULL)
+	{
+		pthread_mutex_unlock(philo->right_ptr);
 		philo->forks--;
 	}
 }
