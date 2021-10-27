@@ -1,5 +1,21 @@
 #include "philosophers.h"
 
+void	destroy_all(t_philo *philos, int n)
+{
+	int	i;
+
+	i = 0;
+	while (i < n && (philos + i)->m_init == TRUE)
+	{
+		pthread_mutex_destroy(&(philos + i)->left);
+		pthread_mutex_destroy((philos + i)->race_ptr);
+		i++;
+	}
+	pthread_mutex_destroy(&philos->params->death_mutex);
+	message(NULL, NULL, FALSE, TRUE);
+	free(philos);
+}
+
 int	display_ret_parsing_err(int error)
 {
 	if (error)
@@ -17,22 +33,6 @@ int	display_ret_parsing_err(int error)
 				STDERR_FILENO);
 	}
 	return (error);
-}	
-
-void	destroy_all(t_philo *philos, int n)
-{
-	int	i;
-
-	i = 0;
-	while (i < n && (philos + i)->m_init == TRUE)
-	{
-		pthread_mutex_destroy(&(philos + i)->left);
-		pthread_mutex_destroy((philos + i)->race_ptr);
-		i++;
-	}
-	pthread_mutex_destroy(&philos->params->death_mutex);
-	message(NULL, NULL, FALSE, TRUE);
-	free(philos);
 }
 
 int	display_ret_system_err(int error, t_philo *philos, int n)
@@ -49,6 +49,7 @@ int	display_ret_system_err(int error, t_philo *philos, int n)
 		else if (error == ER_THR_CREA)
 			ft_putendl_fd("could not create a new thread", STDERR_FILENO);
 	}
+	join_all_threads(philos, philos->params->n);
 	destroy_all(philos, n);
 	return (error);
 }

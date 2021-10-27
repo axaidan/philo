@@ -39,7 +39,8 @@ void		sleeping(t_philo *philo);
 /*	display.c */
 //void		message(t_philo *philo, char *action, int dead);
 void		message(t_philo *philo, char *action, int dead, int shutdown);
-void		text_display(int n, char *action);
+//void		text_display(int n, char *action);
+//void		text_display(int n, char *action);
 
 /*	libft */
 int			ft_atoi(const char *nptr);

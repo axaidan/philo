@@ -66,7 +66,6 @@ int	main(int argc, char *argv[])
 	error = parsing(argc, argv, &params);
 	if (error)
 		return (error);
-	display_params(&params);
 	philos = NULL;
 	error = init_philos_array(params.n, &params, &philos);
 	if (error)
