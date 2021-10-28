@@ -52,7 +52,10 @@ void	watcher(t_philo *philos, int n, int *death)
 			fully_ate++;
 		i++;
 		if (i == n && reset_counters(&i, &fully_ate, n) == FAILURE)
+		{
+			printf("NOBODY died\n");
 			return ;
+		}
 	}
 }
 
