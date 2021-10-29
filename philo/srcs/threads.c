@@ -49,7 +49,7 @@ void	*one_routine(void *param)
 	t_philo *philo;
 
 	philo = param;
-	grab_fork(philo, philo->left_ptr);
+	grab_fork(philo, philo->left_ptr, LEFT);
 	safe_sleep(get_timestamp() + philo->params->die, philo);
 	pthread_mutex_unlock(philo->left_ptr);
 	return (NULL);

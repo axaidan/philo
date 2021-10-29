@@ -1,29 +1,30 @@
 #include "philosophers.h"
 
-void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
+void	grab_fork(t_philo *philo, t_mutex *fork_ptr, int side)
 {
 	pthread_mutex_lock(fork_ptr);
-	message(philo, "has taken a fork", FALSE, FALSE);
+	if (side == LEFT)
+	message(philo, "has taken L fork", FALSE, FALSE);
+	else
+	message(philo, "has taken R fork", FALSE, FALSE);
 }
 
 void	thinking(t_philo *philo)
 {
-	/*
-	if (philo->params->n % 2 == 1 && philo->n + 1 == philo->params->n)
+	/*if (philo->params->n % 2 == 1 && philo->n + 1 == philo->params->n)
 	{
 		grab_fork(philo, philo->right_ptr);
 		grab_fork(philo, philo->left_ptr);
 	}
-	*/
-	if (philo->n % 2 == 0)	// IMPAIRS
+	else*/ if (philo->n % 2 == 0)	// IMPAIRS
 	{
-		grab_fork(philo, philo->left_ptr);
-		grab_fork(philo, philo->right_ptr);
+		grab_fork(philo, philo->left_ptr, LEFT);
+		grab_fork(philo, philo->right_ptr, RIGHT);
 	}
 	else						// PAIRS
 	{
-		grab_fork(philo, philo->right_ptr);
-		grab_fork(philo, philo->left_ptr);
+		grab_fork(philo, philo->right_ptr, RIGHT);
+		grab_fork(philo, philo->left_ptr, LEFT);
 	}
 }
 
@@ -48,14 +49,14 @@ void	eating(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
+	
 	/*
 	if (philo->params->n % 2 == 0 && philo->n + 1 == philo->params->n)
 	{
 		pthread_mutex_unlock(philo->right_ptr);
 		pthread_mutex_unlock(philo->left_ptr);
 	}
-	*/
-	if (philo->n % 2 == 0)		// IMPAIRS
+	else*/ if (philo->n % 2 == 0)		// IMPAIRS
 	{
 		pthread_mutex_unlock(philo->left_ptr);
 		pthread_mutex_unlock(philo->right_ptr);
@@ -74,5 +75,5 @@ void	sleeping(t_philo *philo)
 	message(philo, "is sleeping", FALSE, FALSE);
 	safe_sleep(get_timestamp() + philo->params->slp, philo);
 	message(philo, "is thinking", FALSE, FALSE);
-	usleep(WAIT_UNIT_US);
+	usleep(WAIT_UNIT_US + philo->n * 10);
 }
