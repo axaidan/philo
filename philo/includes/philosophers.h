@@ -31,6 +31,7 @@ void		init_params(t_params *params);
 int			init_philos_array(int n, t_params *params, t_philo **philos_ptr);
 
 /*	actions.c */
+void		grab_fork(t_philo *philo, t_mutex *fork_ptr);
 void		thinking(t_philo *philo);
 void		eating(t_philo *philo);
 void		drop_forks(t_philo *philo);

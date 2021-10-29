@@ -17,14 +17,6 @@ typedef struct	s_params
 	t_mutex	death_mutex;
 }				t_params;
 
-enum	e_last_state
-{
-	BORN,
-	THOUGHT,
-	ATE,
-	SLEPT
-}	;
-
 typedef struct	s_philo
 {
 	t_thread		thr;

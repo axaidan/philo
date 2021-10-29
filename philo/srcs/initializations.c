@@ -14,7 +14,6 @@ static void	init_philo(t_philo *philo, int i, t_params *params)
 {
 	philo->thr = 0;
 	philo->n = i;
-//	philo->forks = 0;
 	philo->left_ptr = NULL;
 	philo->right_ptr = NULL;
 	philo->last_eat = 0;
@@ -23,7 +22,6 @@ static void	init_philo(t_philo *philo, int i, t_params *params)
 	philo->m_init = FALSE;
 	philo->t_init = FALSE;
 	philo->params = params;
-//	philo->last_state = BORN;
 	philo->race_ptr = NULL;
 }
 
@@ -60,20 +58,16 @@ static void	grab_neighbor_s_fork(t_philo **philos_ptr, int n)
 	(*philos_ptr + n - 1)->right_ptr = (*philos_ptr)->left_ptr;
 }
 
-/*
-**	NEED TO :
-**		- CONTROL AT L76 FOR pthread_mutex_init()
-**		- REMOVE check_fork_assignment() DEBUG FUNCTION
-*/
 int	init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 {
 	int	i;
 	int	error;
 
+	if (pthread_mutex_init(&params->death_mutex, NULL) != SUCCESS)
+		return (display_ret_system_err(ER_MUT_INIT, *philos_ptr, n));
 	*philos_ptr = malloc(sizeof(t_philo) * n);
 	if (*philos_ptr == NULL)
 		return (display_ret_system_err(ER_ARR_ALC, *philos_ptr, n));
-	pthread_mutex_init(&params->death_mutex, NULL);
 	i = 0;
 	while (i < n)
 	{
@@ -86,6 +80,5 @@ int	init_philos_array(int n, t_params *params, t_philo **philos_ptr)
 	if (n == 1)
 		return (SUCCESS);
 	grab_neighbor_s_fork(philos_ptr, n);
-	check_fork_assignment(*philos_ptr, n);
 	return (SUCCESS);
 }

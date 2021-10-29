@@ -1,6 +1,6 @@
 #include "philosophers.h"
 
-static void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
+void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
 {
 	pthread_mutex_lock(fork_ptr);
 	message(philo, "has taken a fork", FALSE, FALSE);
@@ -8,12 +8,19 @@ static void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
 
 void	thinking(t_philo *philo)
 {
+	/*
+	if (philo->params->n % 2 == 1 && philo->n + 1 == philo->params->n)
+	{
+		grab_fork(philo, philo->right_ptr);
+		grab_fork(philo, philo->left_ptr);
+	}
+	*/
 	if (philo->n % 2 == 0)	// IMPAIRS
 	{
 		grab_fork(philo, philo->left_ptr);
 		grab_fork(philo, philo->right_ptr);
 	}
-	else					// PAIRS
+	else						// PAIRS
 	{
 		grab_fork(philo, philo->right_ptr);
 		grab_fork(philo, philo->left_ptr);
@@ -41,15 +48,22 @@ void	eating(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
-	if (philo->n % 2 == 0)		// IMPAIRS
+	/*
+	if (philo->params->n % 2 == 0 && philo->n + 1 == philo->params->n)
 	{
 		pthread_mutex_unlock(philo->right_ptr);
 		pthread_mutex_unlock(philo->left_ptr);
 	}
-	else						// PAIRS
+	*/
+	if (philo->n % 2 == 0)		// IMPAIRS
 	{
 		pthread_mutex_unlock(philo->left_ptr);
 		pthread_mutex_unlock(philo->right_ptr);
+	}
+	else							// PAIRS
+	{
+		pthread_mutex_unlock(philo->right_ptr);
+		pthread_mutex_unlock(philo->left_ptr);
 	}
 }
 
