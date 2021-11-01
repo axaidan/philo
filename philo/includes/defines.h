@@ -2,7 +2,8 @@
 # define DEFINES_H
 
 /*	TIMING */
-# define WAIT_UNIT_US 333
+# define WAIT_UNIT_US 100
+# define TEMPORIZATION 300
 
 /*	LOGICALS */
 # define TRUE 1

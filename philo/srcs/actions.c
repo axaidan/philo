@@ -57,5 +57,5 @@ void	sleeping(t_philo *philo)
 	message(philo, "is sleeping", FALSE, FALSE);
 	safe_sleep(get_timestamp() + philo->params->slp, philo);
 	message(philo, "is thinking", FALSE, FALSE);
-	usleep(WAIT_UNIT_US + philo->n * 10);
+	usleep(TEMPORIZATION);
 }

@@ -6,7 +6,7 @@ void	*routine(void *param)
 
 	philo = param;
 	if (philo->n % 2 == 1)
-		usleep(WAIT_UNIT_US + philo->params->n * 20);
+		usleep(TEMPORIZATION);
 	pthread_mutex_lock(philo->race_ptr);
 	while (death_occured(philo) == FALSE && philo->must_eat != 0)
 	{
