@@ -47,7 +47,7 @@ int	display_ret_system_err(int error, t_philo *philos, int n)
 			ft_putendl_fd("could not initialize a mutex",
 				STDERR_FILENO);
 		else if (error == ER_THR_CREA)
-			ft_putendl_fd("could not create a new thread", STDERR_FILENO);
+			ft_putendl_fd("could not create a new thread", STDOUT_FILENO);
 	}
 	join_all_threads(philos, philos->params->n);
 	destroy_all(philos, n);

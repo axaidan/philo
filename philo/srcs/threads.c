@@ -80,6 +80,13 @@ void	join_all_threads(t_philo *philos, int n)
 	{
 		if (pthread_join((philos + i)->thr, NULL) != SUCCESS)
 			printf("could not join thread %d\n", i);
-		i++;
+		i += 2;
+	}
+	i = 1;
+	while (i < n && (philos + i)->t_init == TRUE)
+	{
+		if (pthread_join((philos + i)->thr, NULL) != SUCCESS)
+			printf("could not join thread %d\n", i);
+		i += 2;
 	}
 }

@@ -2,7 +2,7 @@
 # define DEFINES_H
 
 /*	TIMING */
-# define WAIT_UNIT_US 300
+# define WAIT_UNIT_US 333
 
 /*	LOGICALS */
 # define TRUE 1

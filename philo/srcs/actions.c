@@ -49,9 +49,7 @@ void	eating(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
-	
-	/*
-	if (philo->params->n % 2 == 0 && philo->n + 1 == philo->params->n)
+/*	if (philo->params->n % 2 == 1 && philo->n + 1 == philo->params->n)
 	{
 		pthread_mutex_unlock(philo->right_ptr);
 		pthread_mutex_unlock(philo->left_ptr);
