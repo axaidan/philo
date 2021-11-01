@@ -27,7 +27,7 @@ int	start_half_of_threads(t_philo *philos, int n, int start)
 {
 	int	i;
 
-	i = start; 
+	i = start;
 	while (i < n)
 	{
 		if (pthread_create(&(philos + i)->thr, NULL, routine, philos + i)
@@ -46,10 +46,10 @@ int	start_half_of_threads(t_philo *philos, int n, int start)
 
 void	*one_routine(void *param)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = param;
-	grab_fork(philo, philo->left_ptr, LEFT);
+	grab_fork(philo, philo->left_ptr);
 	safe_sleep(get_timestamp() + philo->params->die, philo);
 	pthread_mutex_unlock(philo->left_ptr);
 	return (NULL);

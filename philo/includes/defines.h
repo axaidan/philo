@@ -10,9 +10,6 @@
 # define SUCCESS 0
 # define FAILURE 1
 
-# define LEFT 1
-# define RIGHT 2
-
 /*	ERRORS */
 enum	e_errors
 {

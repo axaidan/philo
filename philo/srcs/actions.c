@@ -1,30 +1,22 @@
 #include "philosophers.h"
 
-void	grab_fork(t_philo *philo, t_mutex *fork_ptr, int side)
+void	grab_fork(t_philo *philo, t_mutex *fork_ptr)
 {
 	pthread_mutex_lock(fork_ptr);
-	if (side == LEFT)
-	message(philo, "has taken L fork", FALSE, FALSE);
-	else
-	message(philo, "has taken R fork", FALSE, FALSE);
+	message(philo, "has taken a fork", FALSE, FALSE);
 }
 
 void	thinking(t_philo *philo)
 {
-	/*if (philo->params->n % 2 == 1 && philo->n + 1 == philo->params->n)
+	if (philo->n % 2 == 0)
+	{
+		grab_fork(philo, philo->left_ptr);
+		grab_fork(philo, philo->right_ptr);
+	}
+	else
 	{
 		grab_fork(philo, philo->right_ptr);
 		grab_fork(philo, philo->left_ptr);
-	}
-	else*/ if (philo->n % 2 == 0)	// IMPAIRS
-	{
-		grab_fork(philo, philo->left_ptr, LEFT);
-		grab_fork(philo, philo->right_ptr, RIGHT);
-	}
-	else						// PAIRS
-	{
-		grab_fork(philo, philo->right_ptr, RIGHT);
-		grab_fork(philo, philo->left_ptr, LEFT);
 	}
 }
 
@@ -34,13 +26,10 @@ void	eating(t_philo *philo)
 
 	message(philo, "is eating", FALSE, FALSE);
 	timestamp = get_timestamp();
-
 	pthread_mutex_lock(philo->race_ptr);
 	philo->death_time = timestamp + philo->params->die;
 	pthread_mutex_unlock(philo->race_ptr);
-
 	safe_sleep(timestamp + philo->params->eat, philo);
-
 	pthread_mutex_lock(philo->race_ptr);
 	if (philo->must_eat != -1 && philo->must_eat != 0)
 		philo->must_eat--;
@@ -49,17 +38,12 @@ void	eating(t_philo *philo)
 
 void	drop_forks(t_philo *philo)
 {
-/*	if (philo->params->n % 2 == 1 && philo->n + 1 == philo->params->n)
-	{
-		pthread_mutex_unlock(philo->right_ptr);
-		pthread_mutex_unlock(philo->left_ptr);
-	}
-	else*/ if (philo->n % 2 == 0)		// IMPAIRS
+	if (philo->n % 2 == 0)
 	{
 		pthread_mutex_unlock(philo->left_ptr);
 		pthread_mutex_unlock(philo->right_ptr);
 	}
-	else							// PAIRS
+	else
 	{
 		pthread_mutex_unlock(philo->right_ptr);
 		pthread_mutex_unlock(philo->left_ptr);

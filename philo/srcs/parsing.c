@@ -63,7 +63,6 @@ static int	get_values(int argc, char **argv, t_params *params)
 	if (params->n == 0 || params->die == 0 || params->eat == 0
 		|| params->slp == 0 || params->times == 0)
 		return (FAILURE);
-	// code biture ici
 	return (SUCCESS);
 }
 

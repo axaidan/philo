@@ -52,10 +52,7 @@ void	watcher(t_philo *philos, int n, int *death)
 			fully_ate++;
 		i++;
 		if (i == n && reset_counters(&i, &fully_ate, n) == FAILURE)
-		{
-			printf("NOBODY died\n");	// DEBUG
 			return ;
-		}
 	}
 }
 
@@ -67,7 +64,6 @@ int	main(int argc, char *argv[])
 
 	init_params(&params);
 	error = parsing(argc, argv, &params);
-	display_params(&params);	// DEBUG
 	if (error)
 		return (error);
 	philos = NULL;

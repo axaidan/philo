@@ -6,7 +6,7 @@ typedef pthread_t			t_thread;
 typedef pthread_mutex_t		t_mutex;
 typedef long unsigned int	t_tstamp;
 
-typedef struct	s_params
+typedef struct s_params
 {
 	int		n;
 	int		die;
@@ -17,7 +17,7 @@ typedef struct	s_params
 	t_mutex	death_mutex;
 }				t_params;
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	t_thread		thr;
 	int				n;
@@ -32,6 +32,6 @@ typedef struct	s_philo
 	int				m_init;
 	int				t_init;
 	t_params		*params;
-}				t_philo;
+}					t_philo;
 
 #endif
